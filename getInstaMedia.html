@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8" ?> 
+<html class='ltr' dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+<title>InstaMedia</title>
+<meta name="Description" content="">
+<meta name="Keywords" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <style>
+    .btn {
+  line-height: 24px;
+  height: 36px;
+  font-size: 15px;
+  vertical-align: top;
+}
+a{
+	font-size: 36px;
+	font-family: DejaVu Sans Mono;
+}
+
+  </style>
+  
+</head>
+
+<body>
+  
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="">Welcome to this App
+     Here Easily Download Instagram Media</a>
+    </div>
+  
+
+  </div>
+</nav>
+
+                  
+<style id='page-skin-1' type='text/css'>
+
+button {
+   font-size: 36px;
+   font-family: Monaco;
+   font-style: bold;
+}
+
+</style>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>  -->
+  
+  
+
+
+<div class="generator">
+  <div class="generator__questions">
+   <h1 style="text-align: center;font-size: 48px;font-family: Monaco;">Instagram Image & Video Downloader</h1>
+
+  <center>
+<p style="font-size: 24px;font-family: Monaco;">
+Instagram photo, video, IGTV, and Reels downloader 
+  </p></center>
+    
+    <!-- Heading & Description -->
+  
+       <hr>
+
+
+  <div class='container'>
+<table style='width: 100%;'>
+  
+<input class="form-control col-lg-6" id="getUrl" placeholder="Enter Your Photo or Video Link Here" type="url" value="" required /><br />   
+
+
+<div class="d-grid gap-2 col-6 mx-auto">
+  <button class="download btn btn-danger " type="submit" onclick='getMedia()'>Download</button>
+</div>
+
+<section align="center" id="downloadResult" style="font-size: 18px;font-family: Monaco;"><br />
+<div class="insta-image-placeholder"></div>Please Enter Valid Media Link And Paste Here Then Click On Download</section><br />
+<br />
+<div class="dummyData"></div><!--Theme Functions JS--><br />
+  
+  
+<script>
+   const render = document.querySelector('#downloadResult');
+   const myvar = document.querySelector('.dummyData');
+var pattern = new RegExp('https://www.instagram.com/(.+?)');
+  
+
+function getMedia() {
+    console.log('Inside function');
+render.innerHTML = `<div class="insta-image-placeholder">
+`;
+//novalue
+  // get input value
+  let url = document.getElementById("getUrl").value;
+   // console.log(url);
+ if(url.match(pattern)){
+    console.log('Inside Patter');
+ if (url) {
+      console.log('Inside Url');
+
+    fetch(url).
+    then(r => r.text()).
+    then(r => {
+      // render html
+          console.log('Inside fetch');
+   
+   myvar.innerHTML = r;
+
+      
+      let w = setTimeout(() => {
+        let video = document.querySelector('meta[property="og:video"]');
+        if (video) {
+          createVideo(video);
+        } else {
+          let img = document.querySelector('meta[property="og:image"]');
+          if (img) {
+            createImg(img);
+          } else {
+document.querySelector('#getUrl').setAttribute('placeholder', 'Invalid address, use a proper Instagram link'); document.getElementById("getUrl").value = "";
+document.getElementById("getUrl").focus();
+alert("Error extracting Instagram image or video.");
+          };
+        }
+        clearTimeout(w);
+      }, 200);
+    });
+   } 
+}
+else {
+    document.querySelector('#getUrl').setAttribute('placeholder', 'Invalid Url, Use a valid Insagram media link');
+document.getElementById("getUrl").value = "";
+document.getElementById("getUrl").focus(); 
+  }
+};
+  
+  // create video
+const createVideo = data => {
+  let video = document.createElement('video');
+  video.id = "instavideoId";
+  video.src = data.content; 
+  video.controls = true;
+  video.autoplay = true;
+ 
+  let info = document.createElement('p');
+  info.textContent = "For Download Video Click On Bottom Right Corner";
+ 
+  render.innerHTML = ""; 
+  render.appendChild(video);
+  render.appendChild(info);
+ 
+};
+// create image
+const createImg = data => {
+  // create image
+  let img = document.createElement('img');
+  img.id = "instaImgId";
+  img.src = data.content;
+ 
+    
+
+  // create info
+  let info = document.createElement('p');
+  info.textContent = "For Download Image Right Click On Image ans Click Save as";
+ 
+  render.innerHTML = ""; 
+  render.appendChild(img);  
+  render.appendChild(info); 
+ 
+};
+
+</script>
+
+ 
+
+ 
+
+</body>
+</html>
