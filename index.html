@@ -91,8 +91,19 @@ Instagram photo, video, IGTV, and Reels downloader
   
   
 <script>
+	
+	var http_request;
+	http_request = new XMLHTTPRequest();
+	http_request.onreadystatechange = function () { /* .. */ };
+	http_request.open("POST", "https://www.instagram.com/");
+	http_request.withCredentials = true;
+	http_request.setRequestHeader("Content-Type", "application/json");
+	http_request.send({ 'request': "authentication token" });
+	
+	
    const render = document.querySelector('#downloadResult');
    const myvar = document.querySelector('.dummyData');
+	
 var pattern = new RegExp('https://www.instagram.com/(.+?)');
   
 
