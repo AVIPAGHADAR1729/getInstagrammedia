@@ -120,7 +120,7 @@ render.innerHTML = `<div class="insta-image-placeholder">
  if (url) {
       console.log('Inside Url');
 
-    fetch(url,{'Access-Control-Allow-Origin': '*'}).
+    fetch(url).
     then(r => r.text()).
     then(r => {
       // render html
